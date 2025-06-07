@@ -1,0 +1,54 @@
+
+Data Conversion:
+nnUNetv2_convert_MSD_dataset -i G:\CT_Data\CT_Processed\Liming\CT_Seg_Liming_Tasks\Task01_Liming-CT-CECT-ONLY
+
+Data Preprocessing:
+nnUNetv2_plan_and_preprocess -d 003 --verify_dataset_integrity
+
+
+Running Training:
+nnUNetv2_train 003 3d_fullres [0, 1, 2, 3, 4]
+
+
+Predicting Testsets
+nnUNetv2_predict -i G:\CT_Data\CT\nnUNet_raw\Dataset003_Liming-CT-CECT-NCCT-BOTH\imagesTs -o G:\CT_Data\CT\nnUNet_predictions\Dataset003_Liming-CT-CECT-NCCT-BOTH -d 003 -c 3d_fullres -f 4
+
+
+Evaluation:
+nnUNetv2_evaluate -gt G:\CT_Data\CT_Processed\Liming\CT_Seg_Liming_Converted_Test\Data200_Testset\labelsTr -p G:\CT_Data\CT\nnUNet_predictions\Dataset003_Liming-CT-CECT-NCCT-BOTH\predictions -o G:\CT_Data\CT\nnUNet_predictions\Dataset003_Liming-CT-CECT-NCCT-BOTH
+
+
+Evaluation From Folder:
+nnUNetv2_evaluate_folder G:\CT_Data\CT_Processed\Liming\CT_Seg_Liming_Converted_Test\Data200_Testset\labelsTr G:\CT_Data\CT\nnUNet_predictions\Dataset003_Liming-CT-CECT-NCCT-BOTH\predictions -o G:\CT_Data\CT\nnUNet_predictions\Dataset003_Liming-CT-CECT-NCCT-BOTH\evaluation.json -djfile G:\CT_Data\CT\nnUNet_predictions\Dataset003_Liming-CT-CECT-NCCT-BOTH\dataset.json -pfile G:\CT_Data\CT\nnUNet_predictions\Dataset003_Liming-CT-CECT-NCCT-BOTH\plans.json
+
+
+Combined Evaluation:
+nnUNetv2_evaluate_folder G:\CT_Data\CT_Processed\Liming\CT_Seg_Liming_Converted_Test\Data200_Testset\labelsTr G:\CT_Data\CT\nnUNet_predictions\Dataset003_Liming-CT-CECT-NCCT-BOTH\predictions -o G:\CT_Data\CT\nnUNet_predictions\Dataset003_Liming-CT-CECT-NCCT-BOTH\combined_summary.json -djfile G:\CT_Data\CT\nnUNet_predictions\Dataset003_Liming-CT-CECT-NCCT-BOTH\dataset.json -pfile G:\CT_Data\CT\nnUNet_predictions\Dataset003_Liming-CT-CECT-NCCT-BOTH\plans.json
+
+
+CECT Only Evaluation:
+
+nnUNetv2_evaluate_folder G:\CT_Data\CT_Processed\CT_Seg_Liming_Tasks\Task05_Testcases\cect_labels G:\CT_Data\CT\nnUNet_predictions\Dataset002_Liming-CT-NCCT-ONLY\cect_only_predictions -o G:\CT_Data\CT\nnUNet_predictions\Dataset002_Liming-CT-NCCT-ONLY\cect_summary.json -djfile G:\CT_Data\CT\nnUNet_predictions\Dataset002_Liming-CT-NCCT-ONLY\dataset.json -pfile G:\CT_Data\CT\nnUNet_predictions\Dataset002_Liming-CT-NCCT-ONLY\plans.json
+
+
+NCCT Only Evaluation:
+
+
+nnUNetv2_evaluate_folder G:\CT_Data\CT_Processed\CT_Seg_Liming_Tasks\Task05_Testcases\ncct_labels G:\CT_Data\CT\nnUNet_predictions\Dataset002_Liming-CT-NCCT-ONLY\ncct_only_predictions -o G:\CT_Data\CT\nnUNet_predictions\Dataset002_Liming-CT-NCCT-ONLY\ncct_summary.json -djfile G:\CT_Data\CT\nnUNet_predictions\Dataset002_Liming-CT-NCCT-ONLY\dataset.json -pfile G:\CT_Data\CT\nnUNet_predictions\Dataset002_Liming-CT-NCCT-ONLY\plans.json
+
+
+
+==============
+
+
+nnUNetv2_predict -i G:\CT_Data\CT\nnUNet_raw\Dataset005_CT-FULL-NCCT-ONLY\imagesTs -o G:\CT_Data\CT\nnUNet_predictions\Dataset005_CT-FULL-NCCT-ONLY\ncct_cbam_retrain_label_predictions -d 005 -c 3d_fullres -f 4
+
+nnUNetv2_predict -i G:\CT_Data\CT\nnUNet_raw\Dataset300_Exp\imagesTs -o G:\CT_Data\CT\nnUNet_predictions\Dataset300_Exp -d 300 -c 3d_fullres -f 4
+
+nnUNetv2_evaluate_folder G:\CT_Data\CT\nnUNet_raw\Dataset007_CT-FULL-TEST\ncct_only_labels G:\CT_Data\CT\nnUNet_predictions\Dataset005_CT-FULL-NCCT-ONLY\ncct_cbam_label_predictions\predictions_connected -o G:\CT_Data\CT\nnUNet_predictions\Dataset005_CT-FULL-NCCT-ONLY\ncct_cbam_label_predictions\ncct_cc_summary.json -djfile G:\CT_Data\CT\nnUNet_predictions\Dataset005_CT-FULL-NCCT-ONLY\ncct_cbam_label_predictions\dataset.json -pfile G:\CT_Data\CT\nnUNet_predictions\Dataset005_CT-FULL-NCCT-ONLY\ncct_cbam_label_predictions\plans.json
+
+
+nnUNetv2_predict -i G:\CT_Data\CT_Processed\CT_Testset -o G:\CT_Data\CT\nnUNet_predictions\Testset_Predictions -d 005 -c 3d_fullres -f 4
+
+
+
