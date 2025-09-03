@@ -1,1 +1,2 @@
-*.py text diff=auto
+text=auto
+*.py text eol=lf
